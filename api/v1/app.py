@@ -1,10 +1,11 @@
 #!/usr/bin/python3
+"""starts a Flask web application"""
 
-# api/v1/app.py
 from flask import Flask
 from api.v1.views import app_views
 from models import storage
 import os
+
 
 app = Flask(__name__)
 app.register_blueprint(app_views, url_prefix='/api/v1')
@@ -12,6 +13,7 @@ app.register_blueprint(app_views, url_prefix='/api/v1')
 
 @app.teardown_appcontext
 def teardown_db(exception):
+    """handles @app.teardown_appcontext"""
     storage.close()
 
 
