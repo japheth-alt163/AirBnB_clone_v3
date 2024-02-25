@@ -2,7 +2,7 @@
 """starts the Flask Airbnb clone
 web application"""
 
-from flask import Flask
+from flask import Flask, jsonify
 from api.v1.views import app_views
 from models import storage
 import os
@@ -16,6 +16,13 @@ app.register_blueprint(app_views)
 def teardown_db(exception):
     """handles @app.teardown_appcontext"""
     storage.close()
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    """returns a JSON-formatted 404
+    status code response"""
+    return jsonify(error="Not found"), 404
 
 
 if __name__ == "__main__":
