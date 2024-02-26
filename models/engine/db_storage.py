@@ -3,7 +3,6 @@
 Contains the class DBStorage
 """
 import models
-import hashlib
 from models.amenity import Amenity
 from models.base_model import BaseModel, Base
 from models.city import City
@@ -66,12 +65,8 @@ class DBStorage:
             return count
 
     def new(self, obj):
-    """Add the object to the current database session"""
-    if obj:
-        if hasattr(obj, 'password'):
-            obj.password = hashlib.md5(obj.password.encode()).hexdigest()
+        """add the object to the current database session"""
         self.__session.add(obj)
-
 
     def save(self):
         """commit all changes of the current database session"""
