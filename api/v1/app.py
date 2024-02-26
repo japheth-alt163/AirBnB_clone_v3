@@ -3,14 +3,9 @@
 web application"""
 
 from flask import Flask, jsonify
-from flask_cors import CORS
 from api.v1.views import app_views
 from models import storage
 import os
-
-
-# Enable CORS for all domains on all routes
-CORS(app)
 
 
 app = Flask(__name__)
